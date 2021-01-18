@@ -12,8 +12,6 @@ function loadCasas() {
 	.then((response) => response.json())
 	.then(json => {
 		this.casas = json.casas;
-
-		// Select first casa by default
 		selectCasa(this.casas[0].id);
 	});
 }
@@ -27,8 +25,6 @@ function loadCasasFiltro(estado) {
 		this.casas = this.casas.filter(casa => {
 			return casa.estado == estado;
 		});
-
-		// Select first casa by default
 		selectCasa(this.casas[0].id);
 	});
 }
@@ -39,12 +35,9 @@ function drawCasas(casas) {
 }
 
 function selectCasa(casaId) {
-	// Deselect casas
 	this.casas.forEach(casa => {
 		casa.isSelected = false;
 	});
-	
-	// Select new casa
 	var casa = this.casas.find(casa => {
 		return casa.id == casaId;
 	});
@@ -54,7 +47,6 @@ function selectCasa(casaId) {
 }
 
 function drawMap(casa) {
-	// Just pass the place name to Google Maps
 	var query = encodeURIComponent(casa.endereco);
 	var template = Handlebars.compile(document.getElementById("map-template").innerHTML);
 	document.getElementById('map-container').innerHTML = template({
